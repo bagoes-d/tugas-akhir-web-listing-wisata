@@ -1,0 +1,124 @@
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.card {
+  background: rgba(8, 14, 32, 0.9);
+  border: 1px solid rgba(124, 58, 237, 0.24);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(67, 56, 202, 0.25);
+  border-color: rgba(96, 165, 250, 0.45);
+}
+
+.card-image {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 14, 33, 0.65) 100%);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-image img {
+  transform: scale(1.1);
+}
+
+.card-kategori {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(96, 165, 250, 0.15);
+  color: #dbeafe;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  backdrop-filter: blur(10px);
+}
+
+.card-content {
+  padding: 1.6rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.65rem;
+  color: #eff6ff;
+}
+
+.card-lokasi {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.card-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.stars {
+  font-weight: 700;
+  color: #60a5fa;
+  font-size: 0.92rem;
+}
+
+.harga {
+  background: rgba(96, 165, 250, 0.12);
+  color: #bfdbfe;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.83rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.card-desc {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  flex: 1;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .card-content {
+    padding: 1.2rem;
+  }
+
+  .card-image {
+    height: 170px;
+  }
+}
