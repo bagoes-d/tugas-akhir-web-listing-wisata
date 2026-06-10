@@ -3,7 +3,7 @@
 [![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React Router](https://img.shields.io/badge/React_Router-7.1-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+[![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://www.netlify.com/)
 
 **BagoesExplore** adalah platform eksplorasi destinasi wisata Indonesia yang dibangun untuk memberikan pengalaman visual yang memukau dan informatif. Proyek ini dikembangkan sebagai **Tugas Akhir Pemrograman Web** dengan fokus pada performa tinggi, antarmuka modern, dan interaktivitas cerdas.
 
