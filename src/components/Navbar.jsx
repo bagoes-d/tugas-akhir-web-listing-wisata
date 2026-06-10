@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          🍀 JelajahRaya
+          🍀 BagoesExplore
         </Link>
         <ul className="navbar-menu">
           <li>

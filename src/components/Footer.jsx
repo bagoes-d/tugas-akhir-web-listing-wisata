@@ -5,8 +5,8 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>WisataIndo</h3>
-          <p>Jelajahi keindahan wisata Indonesia bersama kami.</p>
+          <h3>BagoesExplore</h3>
+          <p>BagoesExplore hadir sebagai ruang inspirasi digital untuk menjelajahi ragam destinasi wisata terbaik di Indonesia. Temukan keindahan alam, budaya, dan petualangan impian Anda bersama kami.</p>
         </div>
         <div className="footer-section">
           <h4>Tautan</h4>
@@ -24,7 +24,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2026 WisataIndo. Semua hak dilindungi.</p>
+        <p>&copy; 2026 BagoesExplore. Semua hak dilindungi.</p>
       </div>
     </footer>
   );

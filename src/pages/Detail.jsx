@@ -83,15 +83,16 @@ export default function Detail() {
 
       <section className="ai-insight">
         <div className="insight-card">
-          <h3>🚀 Insight AI Untuk Perjalananmu</h3>
-          <p>Platform kami menggunakan rekomendasi pintar dan presentasi visual modern untuk membuat destinasi wisata terasa seperti aplikasi premium.</p>
+          <h3>🧭 Rekomendasi Wisata Untuk Perjalananmu</h3>
+          <p>Simak highlight berikut agar perjalananmu lebih nyaman: rencanakan rute, pastikan fasilitas tersedia, dan sesuaikan aktivitas dengan gaya liburanmu.</p>
           <div className="insight-items">
-            <span>• Saran rute terbaik</span>
-            <span>• Fasilitas unggulan</span>
-            <span>• Pilihan sesuai mood liburan</span>
+            <span>• Saran rute & waktu terbaik</span>
+            <span>• Fasilitas unggulan di lokasi</span>
+            <span>• Pilihan aktivitas sesuai mood liburan</span>
           </div>
         </div>
       </section>
+
 
       <section className="wisata-serupa">
         <h2>Rekomendasi Lainnya</h2>
