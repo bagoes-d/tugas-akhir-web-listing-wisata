@@ -1,7 +1,13 @@
+:root {
+  /* Mendefinisikan variabel shadow yang sempat hilang */
+  --shadow-sm: 0 8px 20px rgba(0,0,0,0.2);
+  --shadow-md: 0 20px 40px rgba(0,0,0,0.4);
+}
+
 .detail-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 24px;
+  padding: 4rem 24px; /* Padding lebih besar untuk kesan megah */
 }
 
 .back-button {
@@ -11,7 +17,8 @@
   padding: 0.95rem 1.65rem;
   background: linear-gradient(135deg, #4338ca, #7c3aed);
   color: white;
-  border-radius: 999px;
+  border-radius: 12px; /* Konsisten dengan tombol lain */
+  text-decoration: none; /* Menghilangkan garis bawah link */
   font-weight: 600;
   margin-bottom: 2rem;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -32,10 +39,10 @@
 .detail-header {
   position: relative;
   min-height: 420px;
-  border-radius: 36px;
+  border-radius: 28px; /* Sedikit kurang membulat */
   overflow: hidden;
   margin-bottom: 2.5rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(124, 58, 237, 0.2); /* Shadow lebih menonjol */
   background: linear-gradient(180deg, rgba(10, 18, 41, 0.85), rgba(7, 12, 29, 0.95));
   border: 1px solid rgba(124, 58, 237, 0.22);
 }
@@ -61,24 +68,44 @@
   padding: 2rem 2.2rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start; /* Sejajarkan badge ke atas */
   gap: 1rem;
+  flex-direction: column; /* Tumpuk judul dan badge */
 }
 
 .detail-overlay h1 {
   font-size: clamp(2rem, 3vw, 2.8rem);
   margin: 0;
   line-height: 1.05;
+  color: #eff6ff;
+  margin-bottom: 1rem; /* Jarak antara judul dan badge */
 }
 
+.header-badges {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Badge Kategori */
 .kategori-badge {
   background: rgba(96, 165, 250, 0.16);
-  padding: 0.75rem 1.2rem;
-  border-radius: 999px;
+  padding: 0.6rem 1.1rem; /* Padding sedikit lebih kecil */
+  border-radius: 20px; /* Lebih membulat */
   font-size: 0.95rem;
   font-weight: 700;
   color: #eff6ff;
   border: 1px solid rgba(96, 165, 250, 0.28);
+}
+
+.rating-badge { /* Badge Rating baru */
+  background: rgba(251, 191, 36, 0.16); /* Latar belakang kekuningan */
+  padding: 0.6rem 1.1rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fbbf24; /* Teks kuning */
+  border: 1px solid rgba(251, 191, 36, 0.28);
 }
 
 .detail-content {
@@ -95,11 +122,12 @@
 }
 
 .info-item {
-  background: rgba(10, 16, 35, 0.94);
+  background: rgba(255, 255, 255, 0.03); /* Latar belakang glassmorphism */
   padding: 1.75rem;
   border-radius: 28px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(124, 58, 237, 0.16);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Shadow halus */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Border halus */
+  backdrop-filter: blur(8px); /* Blur glassmorphism */
 }
 
 .info-item h3 {
@@ -127,11 +155,12 @@
 }
 
 .detail-description {
-  background: rgba(10, 16, 35, 0.94);
+  background: rgba(255, 255, 255, 0.03); /* Latar belakang glassmorphism */
   padding: 2rem;
   border-radius: 28px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Shadow halus */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Border halus */
+  backdrop-filter: blur(8px); /* Blur glassmorphism */
 }
 
 .detail-description h2 {
@@ -168,40 +197,68 @@
 }
 
 .ai-insight {
+  margin: 4rem 0;
+  padding: 2.5rem;
+  background: rgba(94, 234, 212, 0.02);
+  border-radius: 32px;
+  border: 1px solid rgba(94, 234, 212, 0.1);
+}
+
+.ai-header {
+  text-align: center;
   margin-bottom: 2.5rem;
 }
 
-.insight-card {
-  background: rgba(8, 14, 32, 0.92);
-  border: 1px solid rgba(96, 165, 250, 0.2);
-  border-radius: 28px;
-  padding: 1.75rem 2rem;
-  box-shadow: var(--shadow-sm);
+.ai-badge {
+  background: linear-gradient(90deg, #5eead4, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Properti standar */
+  color: transparent;    /* Properti standar */
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
-.insight-card h3 {
-  margin-bottom: 0.75rem;
-  color: #eff6ff;
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-.insight-card p {
-  color: #cbd5e1;
-  line-height: 1.8;
+.insight-box {
+  background: rgba(255, 255, 255, 0.03); /* Latar belakang glassmorphism dikembalikan */
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.insight-box:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(94, 234, 212, 0.3);
+  transform: translateY(-5px);
+}
+
+.insight-icon {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.insight-items {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  color: #60a5fa;
-  font-weight: 600;
+.insight-box h4 {
+  color: #5eead4;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
 }
 
-.insight-items span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.insight-box p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .action-buttons {
@@ -223,23 +280,28 @@
 .btn-pesan {
   background: #4338ca;
   color: white;
-  box-shadow: 0 14px 30px rgba(67, 56, 202, 0.18);
+  box-shadow: 0 10px 25px rgba(67, 56, 202, 0.3); /* Shadow lebih menonjol */
+  transition: all 0.3s ease;
 }
 
 .btn-pesan:hover {
   background-color: #5b21b6;
   transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(67, 56, 202, 0.4);
 }
 
 .btn-hubungi {
   background: rgba(255, 255, 255, 0.06);
   color: #eff6ff;
   border: 1px solid rgba(96, 165, 250, 0.24);
+  transition: all 0.3s ease; /* Pindah ke sini agar animasi smooth */
 }
 
 .btn-hubungi:hover {
   background-color: rgba(96, 165, 250, 0.16);
   color: #eff6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .wisata-serupa {
@@ -258,17 +320,21 @@
 }
 
 .mini-card {
-  background: rgba(10, 16, 35, 0.94);
-  border-radius: 28px;
+  text-decoration: none; /* Hilangkan garis bawah */
+  color: inherit; /* Warisi warna teks */
+  background: rgba(255, 255, 255, 0.03); /* Latar belakang glassmorphism */
+  border-radius: 24px; /* Konsisten dengan kartu Home */
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  border: 1px solid rgba(96, 165, 250, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Border halus */
+  backdrop-filter: blur(12px); /* Blur glassmorphism */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transisi premium */
+  padding: 0;
 }
 
 .mini-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-12px); /* Angkat lebih tinggi saat hover */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(94, 234, 212, 0.1); /* Shadow lebih menonjol */
+  border-color: rgba(94, 234, 212, 0.3); /* Border aksen saat hover */
 }
 
 .mini-card img {
@@ -278,14 +344,15 @@
 }
 
 .mini-card h4 {
-  padding: 1rem 1rem 0.5rem;
+  padding: 1rem 1rem 0.4rem; /* Padding disesuaikan */
   margin: 0;
   color: #eff6ff;
   font-size: 1rem;
+  font-weight: 700; /* Lebih tebal */
 }
 
 .mini-card p {
-  padding: 0 1rem 1rem;
+  padding: 0 1rem 1.2rem; /* Padding disesuaikan */
   margin: 0;
   color: #94a3b8;
   font-size: 0.95rem;

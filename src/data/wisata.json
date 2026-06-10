@@ -87,6 +87,17 @@
       "gambar": "/images/desa penglipuran.jpg",
       "jam": "08:00 - 18:00",
       "kategori": "Kebudayaan"
+    },
+    {
+      "id": 9,
+      "nama": "Danau Toba",
+      "lokasi": "Sumatera Utara",
+      "deskripsi": "Danau vulkanik terbesar di dunia dengan pulau Samosir di tengahnya. Menawarkan pemandangan alam yang memukau dan budaya Batak yang kaya.",
+      "rating": 4.7,
+      "harga": 500000,
+      "gambar": "/images/danau toba.png",
+      "jam": "24 jam",
+      "kategori": "Alam"
     }
   ]
 }

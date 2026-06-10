@@ -1,34 +1,59 @@
 import React from 'react';
-// JALUR DIKOREKSI: Mengambil gambar Raja Ampat langsung dari folder image kamu
-import bgHero from '../image/raja ampat.png'; 
+
+// Gambar dipindahkan ke sini agar bisa diakses oleh objek styles di luar fungsi
+const bgHero = "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1920&q=80";
 
 export default function Hero() {
+  const scrollToExplore = () => {
+    const element = document.getElementById('explore-section');
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section style={styles.heroContainer}>
+      <style>{animations}</style>
+      {/* Lapisan gelap agar foto menyatu dengan background web */}
       <div style={styles.overlay}></div>
 
       <div style={styles.heroContent}>
-        <div style={styles.badge}>
-          <span>Eksplorasi Nusantara Indonesia</span>
+        <div style={{ ...styles.badge, animation: 'fadeInUp 0.8s ease-out' }}>
+          <span>✨ Pesona Indonesia</span>
         </div>
         
-        <h1 style={styles.mainTitle}>
-          Jelajahi Pesona & Keindahan <br />
-          <span style={styles.highlightText}>Destinasi Indonesia</span>
+        <h1 style={{ ...styles.mainTitle, animation: 'float 6s ease-in-out infinite' }}>
+          Jelajahi Kemegahan Alam <br />
+          <span style={styles.highlightText}>& Budaya Indonesia</span>
         </h1>
         
         <p style={styles.subTitle}>
-          Temukan destinasi wisata terbaik, surga tersembunyi, dan ragam <br />
-          budaya kaya di seluruh penjuru negeri bersama BagoesExplore.
+          Temukan destinasi bersejarah, surga tersembunyi, dan pengalaman <br />
+          petualangan tak terlupakan di seluruh penjuru negeri bersama BagoesExplore.
         </p>
 
         <div style={styles.buttonGroup}>
-          <button style={styles.primaryBtn}>Mulai Petualangan</button>
+          <button onClick={scrollToExplore} style={styles.primaryBtn}>Mulai Petualangan</button>
+          <button onClick={scrollToExplore} style={styles.secondaryBtn}>Lihat Destinasi</button>
         </div>
       </div>
     </section>
   );
 }
+
+const animations = `
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  button:hover {
+    transform: scale(1.05) translateY(-2px);
+    filter: brightness(1.2);
+  }
+`;
 
 const styles = {
   heroContainer: {
@@ -37,7 +62,7 @@ const styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    minHeight: '70vh', 
+    minHeight: '85vh', 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -47,53 +72,71 @@ const styles = {
   overlay: {
     position: 'absolute',
     top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: 'rgba(7, 11, 24, 0.55)', 
+    background: 'linear-gradient(180deg, rgba(7, 11, 24, 0.2) 0%, rgba(7, 11, 24, 0.8) 50%, #070b18 100%)', 
     zIndex: 1,
   },
   heroContent: {
     position: 'relative',
     zIndex: 2,
     textAlign: 'center',
-    maxWidth: '800px',
+    maxWidth: '850px',
   },
   badge: {
     display: 'inline-block',
-    padding: '6px 14px',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
+    padding: '8px 20px',
+    backgroundColor: 'rgba(94, 234, 212, 0.15)',
+    border: '1px solid rgba(94, 234, 212, 0.4)',
     borderRadius: '20px',
-    color: '#98a7d4',
+    color: '#5eead4',
     fontSize: '14px',
-    marginBottom: '20px',
+    marginBottom: '24px',
+    fontWeight: '600',
+    letterSpacing: '0.05em',
   },
   mainTitle: {
     color: '#ffffff',
-    fontSize: '3.2rem',
-    fontWeight: '800',
-    lineHeight: '1.2',
+    fontSize: 'clamp(2.8rem, 5vw, 4.5rem)',
+    fontWeight: '900',
+    lineHeight: '1.1',
     marginBottom: '20px',
+    letterSpacing: '-0.02em',
   },
   highlightText: {
-    color: '#4ade80', // Menggunakan warna hijau alam segar agar senada dengan logo semanggi kamu
+    color: '#5eead4', /* Warna hijau cyan toska yang segar khas alam malam */
   },
   subTitle: {
     color: '#98a7d4',
-    fontSize: '1.2rem',
-    lineHeight: '1.6',
-    marginBottom: '36px',
+    fontSize: '1.15rem',
+    lineHeight: '1.8',
+    marginBottom: '40px',
   },
   buttonGroup: {
     display: 'flex',
+    gap: '16px',
     justifyContent: 'center',
+    flexWrap: 'wrap',
   },
   primaryBtn: {
     padding: '14px 32px',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#14b8a6',
     color: '#070b18',
     border: 'none',
-    borderRadius: '30px',
+    borderRadius: '12px',
     fontWeight: '700',
     fontSize: '16px',
     cursor: 'pointer',
+    boxShadow: '0 10px 25px rgba(20, 184, 166, 0.4)',
+    transition: 'all 0.3s ease',
+  },
+  secondaryBtn: {
+    padding: '14px 32px',
+    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    color: '#ffffff',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+    borderRadius: '12px',
+    fontWeight: '600',
+    fontSize: '16px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
   },
 };

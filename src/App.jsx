@@ -1,26 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Detail from './pages/Detail';
-import './App.css';
+import Navbar from './components/Navbar'; // Import Navbar
+import Footer from './components/Footer'; // Import Footer
 
 function App() {
-
   return (
-    <Router>
-      <div className="app">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/detail/:id" element={<Detail />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
-  )
+    <BrowserRouter>
+      <Navbar /> {/* Tambahkan Navbar di sini */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/detail/:id" element={<Detail />} />
+      </Routes>
+      <Footer /> {/* Tambahkan Footer di sini */}
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -170,15 +170,19 @@ Text:        #333333 (Dark Gray)
 | `kategori` | string | Category |
 
 ## 🌍 Dummy Data - 6 Destinasi
+## 🌍 Dummy Data - 9 Destinasi
 
 | No | Nama | Lokasi | Kategori | Rating | Harga |
 |----|------|--------|----------|--------|-------|
 | 1 | Candi Borobudur | Magelang, JT | Bersejarah | 4.8 | Rp 35.000 |
-| 2 | Pantai Kuta | Bali | Pantai | 4.6 | Gratis |
+| 2 | Pantai Kuta | Bali | Pantai | 4.6 | Rp 20.000 |
 | 3 | Taman Nasional Komodo | NTT | Alam | 4.7 | Rp 150.000 |
-| 4 | Gunung Bromo | Jawa Timur | Alam | 4.9 | Rp 75.000 |
+| 4 | Gunung Sindoro | Magelang, JT | Alam | 4.9 | Rp 75.000 |
 | 5 | Raja Ampat | Papua Barat | Pantai | 4.9 | Rp 500.000 |
 | 6 | Keraton Yogyakarta | Yogyakarta | Bersejarah | 4.5 | Rp 25.000 |
+| 7 | Kawah Ijen | Banyuwangi, JT | Gunung | 4.8 | Rp 15.000 |
+| 8 | Desa Penglipuran | Bangli, Bali | Kebudayaan | 4.9 | Rp 25.000 |
+| 9 | Danau Toba | Sumatera Utara | Alam | 4.7 | Gratis |
 
 ## 🎯 Routes
 

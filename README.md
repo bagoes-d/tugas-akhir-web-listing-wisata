@@ -1,31 +1,99 @@
-# JelajahRaya — Web Listing Destinasi Wisata
+# ✨ BagoesExplore — Indonesian Tourism Discovery Platform
 
-Sebuah aplikasi web listing destinasi wisata sederhana untuk tugas akhir Pemrograman Web. 
-Proyek ini menampilkan daftar destinasi wisata Indonesia dengan data JSON lokal dan desain responsif.
+[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React Router](https://img.shields.io/badge/React_Router-7.1-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
+**BagoesExplore** adalah platform eksplorasi destinasi wisata Indonesia yang dibangun untuk memberikan pengalaman visual yang memukau dan informatif. Proyek ini dikembangkan sebagai **Tugas Akhir Pemrograman Web** dengan fokus pada performa tinggi, antarmuka modern, dan interaktivitas cerdas.
+
+---
 
 ## ✨ Fitur Utama
 
-- Kartu destinasi dengan gambar, nama, kategori, lokasi, rating, dan cuplikan deskripsi
-- Data dimuat menggunakan `fetch` dari `public/wisata.json`
-- Filter kategori untuk menampilkan destinasi berdasarkan minat
-- Responsif untuk desktop dan mobile
-- Mudah dikembangkan dan diedit melalui file JSON lokal
+### 🌌 Premium Glassmorphism UI
+Antarmuka bertema gelap yang elegan dengan efek *blur* transparan (Glassmorphism), tipografi yang tajam, dan palet warna *Emerald-Cyan* untuk kesan mewah dan modern.
 
-## 🚀 Quick Start
+### 🧠 AI Smart Insight
+Fitur unggulan yang memberikan tips perjalanan personal (rute terbaik, waktu kunjungan, dan fasilitas unggulan) yang disesuaikan secara dinamis untuk setiap destinasi unik.
 
-### Prasyarat
+### 🎯 Interaktivitas Cerdas
+- **Dynamic Filtering**: Filter kategori (Alam, Pantai, Bersejarah, dll) dengan counter otomatis.
+- **Smooth Scrolling**: Navigasi mulus menggunakan interaksi berbasis ID.
+- **Hover Micro-interactions**: Efek kartu yang responsif dan animasi *floating* pada hero section.
 
-- Browser modern (Chrome, Firefox, Edge)
-- Node.js terpasang jika ingin menjalankan project dengan Vite
+### 📱 Responsif & Adaptif
+Optimal di semua perangkat, mulai dari layar desktop lebar hingga perangkat seluler terkecil.
 
-### Menjalankan Secara Lokal
+---
 
-1. Buka folder proyek di VS Code
-2. Jalankan perintah:
+## 🛠️ Tech Stack
 
-```bash
-npm install
-npm run dev
+| Teknologi | Kegunaan |
+|-----------|----------|
+| **React 19** | Library UI utama untuk manajemen komponen |
+| **Vite** | Tool *build* super cepat untuk pengalaman pengembangan maksimal |
+| **React Router 7** | Manajemen navigasi dan *dynamic routing* halaman detail |
+| **CSS3 Hooks** | Custom animations dan variabel desain sistem |
+| **JSON API** | Manajemen data lokal untuk kemudahan skalabilitas |
+
+---
+
+## 🚀 Menjalankan Proyek
+
+### 📋 Prasyarat
+- **Node.js** (Versi 16 atau lebih baru)
+- Browser modern (Chrome, Edge, Safari, Firefox)
+
+### 💻 Instalasi Lokal
+
+1. **Clone & Masuk ke Folder**
+   ```bash
+   cd tugas-akhir-web-listing-wisata
+   ```
+
+2. **Install Dependensi**
+   ```bash
+   npm install
+   ```
+
+3. **Jalankan Mode Pengembangan**
+   ```bash
+   npm run dev
+   ```
+
+4. **Akses di Browser**
+   Buka `http://localhost:5173`
+
+---
+
+## 📂 Struktur Proyek
+
+```text
+src/
+├── components/   # Komponen UI (Navbar, Hero, Footer, Card)
+├── data/         # Sumber data utama (wisata.json)
+├── pages/        # Halaman utama (Home.jsx, Detail.jsx)
+├── styles/       # File CSS terpisah untuk modularitas
+└── App.jsx       # Routing dan entry point aplikasi
+```
+
+---
+
+## 📊 Format Data (`wisata.json`)
+
+Data dikelola secara terpusat agar mudah untuk ditambah atau diedit tanpa menyentuh kode program:
+
+```json
+{
+  "id": 1,
+  "nama": "Candi Borobudur",
+  "lokasi": "Magelang, Jawa Tengah",
+  "rating": 4.8,
+  "harga": 35000,
+  "gambar": "/images/candi borobudur.jpg",
+  "kategori": "Bersejarah"
+}
 ```
 
 3. Buka alamat yang ditampilkan di terminal, biasanya `http://localhost:5173`
