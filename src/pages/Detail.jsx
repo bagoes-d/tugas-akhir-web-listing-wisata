@@ -68,17 +68,15 @@ export default function Detail() {
     setLoading(true); // Set loading true saat mulai fetch
 
     
-    // Mengambil semua data untuk menghindari error 500 pada filter server
-    fetch(`${import.meta.env.VITE_API_URL}/listings`)
+    // Mengambil data dari API Produksi dengan filter kategori 'wisata'
+    fetch(`${import.meta.env.VITE_API_URL}/listings?category=wisata`)
       .then((res) => {
         if (!res.ok) throw new Error('Gagal memuat data dari API');
         return res.json();
       })
       .then((resJson) => {
-        // Filter kategori 'wisata' di sisi klien dan mapping data
-        const mappedList = (resJson.data || [])
-          .filter(item => item.category?.slug === 'wisata')
-          .map(item => ({
+        // Memetakan data API ke format yang dikenali UI (nama, lokasi, harga, dll)
+        const mappedList = (resJson.data || []).map(item => ({
           id: item.id,
           nama: item.title, // API menggunakan 'title'
           lokasi: item.metadata?.destination || 'Lokasi tidak tersedia', 

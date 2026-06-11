@@ -18,16 +18,18 @@ export default function Home() {
   const [kategori, setKategori] = useState('Semua');
   const [daftarWisata, setDaftarWisata] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(true);
     // Mengambil semua data untuk menghindari error 500 pada filter server
-    fetch(`${import.meta.env.VITE_API_URL}/listings`)
+    fetch(`${import.meta.env.VITE_API_URL}/listings?category=wisata`)
       .then((res) => {
-        if (!res.ok) throw new Error('Gagal memuat data dari API');
+        if (!res.ok) throw new Error(`Server Error (${res.status}): Gagal memuat data.`);
         return res.json();
       })
       .then((resJson) => {
+        if (!resJson.success) throw new Error(resJson.message || 'Gagal memuat data');
         // Filter kategori 'wisata' di sisi klien dan mapping data
         const mappedData = Array.isArray(resJson.data) 
           ? resJson.data
@@ -48,6 +50,7 @@ export default function Home() {
       })
       .catch((err) => {
         console.error(err);
+        setError(err.message || "Gagal terhubung ke server. Silakan coba lagi nanti.");
         setLoading(false);
       });
   }, []);
@@ -58,6 +61,14 @@ export default function Home() {
     : daftarWisata.filter(w => w.kategori === kategori);
 
   if (loading) return <div style={{ backgroundColor: '#070b18', minHeight: '100vh', color: '#fff', padding: '100px', textAlign: 'center' }}>Memuat Destinasi...</div>;
+
+  if (error) return (
+    <div style={{ backgroundColor: '#070b18', minHeight: '100vh', color: '#fff', padding: '100px', textAlign: 'center' }}>
+      <h2 style={{ color: '#ff4d4d' }}>⚠️ {error}</h2>
+      <p>Server sedang mengalami gangguan (Internal Server Error 500).</p>
+      <button onClick={() => window.location.reload()} style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}>Muat Ulang Halaman</button>
+    </div>
+  );
 
   return (
     <div style={{ backgroundColor: '#070b18', minHeight: '100vh', color: '#fff' }}>
