@@ -21,24 +21,28 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    // Mengambil data dari API Produksi dengan filter kategori 'wisata'
-    fetch('https://listing-webki-production.up.railway.app/api/listings?category=wisata')
+    // Mengambil semua data untuk menghindari error 500 pada filter server
+    fetch(`${import.meta.env.VITE_API_URL}/listings`)
       .then((res) => {
         if (!res.ok) throw new Error('Gagal memuat data dari API');
         return res.json();
       })
       .then((resJson) => {
-        // Memetakan data API (title, imageUrl, metadata) ke format UI (nama, gambar, lokasi)
-        const mappedData = (resJson.data || []).map(item => ({
+        // Filter kategori 'wisata' di sisi klien dan mapping data
+        const mappedData = Array.isArray(resJson.data) 
+          ? resJson.data
+          .filter(item => item.category?.slug === 'wisata')
+          .map(item => ({
           id: item.id,
           nama: item.title,
-          lokasi: item.metadata?.location || 'Indonesia',
+          lokasi: item.metadata?.destination || 'Indonesia',
           deskripsi: item.description,
           rating: item.rating || 4.5,
-          harga: item.metadata?.ticketPrice || 0,
+          harga: item.metadata?.price || 0,
           gambar: item.imageUrl,
           kategori: item.category?.name || 'Wisata'
-        }));
+        }))
+        : [];
         setDaftarWisata(mappedData);
         setLoading(false);
       })
