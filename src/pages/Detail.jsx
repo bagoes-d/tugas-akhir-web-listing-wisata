@@ -2,109 +2,6 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 import '../styles/Detail.css';
  
-// Fallback data agar 100% aman saat JSON tidak sesuai atau tidak ditemukan
-const fallbackWisataById = {
-  1: {
-    id: 1,
-    nama: 'Candi Borobudur',
-    lokasi: 'Magelang, Jawa Tengah',
-    deskripsi: 'Candi Borobudur adalah candi Buddha terbesar di dunia yang dibangun pada abad ke-8. Arsitektur yang megah dengan ribuan patung Buddha menghiasi setiap sudutnya.',
-    rating: 4.8,
-    harga: 35000,
-    gambar: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=80', // Unsplash URL
-    jam: '08:00 - 17:00',
-    kategori: 'Bersejarah',
-  },
-  2: {
-    id: 2,
-    nama: 'Pantai Kuta',
-    lokasi: 'Bali',
-    deskripsi: 'Pantai indah dengan pasir putih dan ombak yang sempurna untuk surfing. Terkenal dengan sunset yang memukau dan berbagai aktivitas pantai.',
-    rating: 4.6,
-    harga: 20000,
-    gambar: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80', // Unsplash URL
-    jam: 'Bebas',
-    kategori: 'Pantai',
-  },
-  3: {
-    id: 3,
-    nama: 'Taman Nasional Komodo',
-    lokasi: 'Nusa Tenggara Timur',
-    deskripsi: 'Rumah bagi komodo raksasa dan keindahan alam yang luar biasa. Menawarkan petualangan hiking dan diving dengan pemandangan laut yang spektakuler.',
-    rating: 4.6,
-    harga: 150000,
-    gambar: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80', // Unsplash URL
-    jam: '07:00 - 18:00',
-    kategori: 'Alam',
-  },
-  4: {
-    id: 4,
-    nama: 'Gunung Sindoro',
-    lokasi: 'Magelang, Jawa Tengah',
-    deskripsi: 'Gunung berapi aktif dengan pemandangan lautan pasir yang menakjubkan. Tempat terbaik untuk menyaksikan sunrise di atas awan.',
-    rating: 4.9,
-    harga: 75000,
-    gambar: 'https://images.unsplash.com/photo-1627546059253-833e0bc9df5f?w=1200&q=80', // Unsplash URL
-    jam: '05:00 - 16:00',
-    kategori: 'Alam',
-  },
-  5: {
-    id: 5,
-    nama: 'Raja Ampat',
-    lokasi: 'Papua Barat',
-    deskripsi: 'Destinasi diving terbaik di dunia dengan keanekaragaman terumbu karang dan kehidupan laut yang luar biasa kaya.',
-    rating: 4.9,
-    harga: 500000,
-    gambar: 'https://images.unsplash.com/photo-1516690561799-46d8f74f90f6?w=1200&q=80', // Unsplash URL
-    jam: '24 jam',
-    kategori: 'Pantai',
-  },
-  6: {
-    id: 6,
-    nama: 'Keraton Yogyakarta',
-    lokasi: 'Yogyakarta',
-    deskripsi: 'Istana tradisional Jawa yang masih dihuni oleh keluarga kerajaan. Menampilkan arsitektur Jawa yang indah dan kaya akan sejarah.',
-    rating: 4.5,
-    harga: 25000,
-    gambar: 'https://images.unsplash.com/photo-1570191913384-7b3ff1f43505?w=1200&q=80', // Unsplash URL
-    jam: '08:30 - 14:30',
-    kategori: 'Bersejarah',
-  },
-  7: {
-    id: 7,
-    nama: 'Kawah Ijen',
-    lokasi: 'Banyuwangi, Jawa Timur',
-    deskripsi: 'Terkenal dengan fenomena langka Api Biru (Blue Fire) yang mendunia dan keindahan kawah asam berwarna hijau toska.',
-    rating: 4.8,
-    harga: 'Rp 15.000',
-    gambar: 'https://images.unsplash.com/photo-1621271104301-443b7405be1b?w=1200&q=80', // Unsplash URL
-    jam: '04:00 - 17:00',
-    kategori: 'Gunung',
-  },
-  8: {
-    id: 8,
-    nama: 'Desa Penglipuran',
-    lokasi: 'Bangli, Bali',
-    deskripsi: 'Salah satu desa terbersih di dunia yang mempertahankan tata ruang tradisional dan kelestarian budaya adat Bali.',
-    rating: 4.9,
-    harga: 'Rp 25.000',
-    gambar: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=1200&q=80', // Unsplash URL
-    jam: '08:00 - 18:00',
-    kategori: 'Kebudayaan',
-  },
-  9: {
-    id: 9,
-    nama: 'Danau Toba',
-    lokasi: 'Sumatera Utara',
-    deskripsi: 'Danau vulkanik terbesar di dunia dengan pulau Samosir di tengahnya. Menawarkan pemandangan alam yang memukau dan budaya Batak yang kaya.',
-    rating: 4.7,
-    harga: 0, // Gratis
-    gambar: 'https://images.unsplash.com/photo-1579703444400-d8615b31093c?w=1200&q=80',
-    kategori: 'Alam',
-    jam: '24 jam',
-  },
-};
-
 // Data Insight Spesifik per Destinasi untuk efek "Wah"
 const aiInsightsData = {
   1: { // Borobudur
@@ -169,25 +66,38 @@ export default function Detail() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true); // Set loading true saat mulai fetch
+
     
-    // Mengambil data menggunakan FETCH (Syarat Nilai 90-100)
-    fetch('/wisata.json') // Mengambil dari folder public
-      .then((res) => res.json())
-      .then((data) => {
-        const list = data?.wisata || [];
-        setAllWisata(list); // Simpan semua data untuk rekomendasi
-        
-        const found = list.find((w) => Number(w.id) === parsedId);
+    // Mengambil data dari API Produksi dengan filter kategori 'wisata'
+    fetch('https://listing-webki-production.up.railway.app/api/listings?category=wisata')
+      .then((res) => {
+        if (!res.ok) throw new Error('Gagal memuat data dari API');
+        return res.json();
+      })
+      .then((resJson) => {
+        // Memetakan data API ke format yang dikenali UI (nama, lokasi, harga, dll)
+        const mappedList = (resJson.data || []).map(item => ({
+          id: item.id,
+          nama: item.title, // API menggunakan 'title'
+          lokasi: item.metadata?.destination || 'Lokasi tidak tersedia', 
+          deskripsi: item.description,
+          rating: item.rating || 4.5,
+          harga: item.metadata?.price || 0, // Mengambil dari metadata price
+          gambar: item.imageUrl, // API menggunakan 'imageUrl'
+          jam: item.metadata?.opening_hours || '08:00 - 17:00',
+          kategori: item.category?.name || 'Wisata'
+        }));
+
+        setAllWisata(mappedList);
+
+        const found = mappedList.find((w) => Number(w.id) === parsedId);
         if (found) {
           setWisata(found);
-        } else {
-          setWisata(fallbackWisataById[parsedId] || null); // Gunakan fallback jika tidak ditemukan
         }
         setLoading(false); // Set loading false setelah data didapat
       })
       .catch((err) => {
         console.error("Gagal memuat data:", err);
-        setWisata(fallbackWisataById[parsedId] || null); // Gunakan fallback jika fetch gagal
         setLoading(false); // Set loading false meskipun ada error
       });
   }, [parsedId]);
@@ -229,7 +139,7 @@ export default function Detail() {
           className="detail-image"
           onError={(e) => {
             e.currentTarget.onerror = null;
-            e.currentTarget.src = fallbackWisataById[parsedId]?.gambar || '';
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800'; // Default fallback image
           }}
         />
         <div className="detail-overlay">
@@ -326,7 +236,7 @@ export default function Detail() {
                   alt={w.nama}
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = fallbackWisataById[w.id]?.gambar || '';
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800';
                   }}
                 />
                 <h4>{w.nama}</h4>

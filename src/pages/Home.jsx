@@ -20,14 +20,26 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mengambil data menggunakan FETCH untuk syarat nilai 90-100
-    fetch('/wisata.json')
+    setLoading(true);
+    // Mengambil data dari API Produksi dengan filter kategori 'wisata'
+    fetch('https://listing-webki-production.up.railway.app/api/listings?category=wisata')
       .then((res) => {
-        if (!res.ok) throw new Error('Gagal memuat data');
+        if (!res.ok) throw new Error('Gagal memuat data dari API');
         return res.json();
       })
-      .then((data) => {
-        setDaftarWisata(data.wisata || []);
+      .then((resJson) => {
+        // Memetakan data API (title, imageUrl, metadata) ke format UI (nama, gambar, lokasi)
+        const mappedData = (resJson.data || []).map(item => ({
+          id: item.id,
+          nama: item.title,
+          lokasi: item.metadata?.location || 'Indonesia',
+          deskripsi: item.description,
+          rating: item.rating || 4.5,
+          harga: item.metadata?.ticketPrice || 0,
+          gambar: item.imageUrl,
+          kategori: item.category?.name || 'Wisata'
+        }));
+        setDaftarWisata(mappedData);
         setLoading(false);
       })
       .catch((err) => {
@@ -106,7 +118,7 @@ export default function Home() {
                 <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ color: '#fbbf24', fontWeight: '600' }}>⭐ {wisata.rating}</span>
                   <span style={{ color: '#5eead4', fontWeight: 'bold' }}>
-                    {typeof wisata.harga === 'number' ? (wisata.harga > 0 ? `Rp ${wisata.harga.toLocaleString()}` : 'Gratis') : wisata.harga}
+                    {typeof wisata.harga === 'number' ? (wisata.harga > 0 ? `Rp ${wisata.harga.toLocaleString()}` : '') : wisata.harga}
                   </span>
                 </div>
               </div>
