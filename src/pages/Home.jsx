@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import wisataData from '../data/wisata.json';
 
 const imgFallbacks = {
   1: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=600&q=80',
@@ -18,41 +19,13 @@ export default function Home() {
   const [kategori, setKategori] = useState('Semua');
   const [daftarWisata, setDaftarWisata] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    // Mengambil semua data untuk menghindari error 500 pada filter server
-    fetch(`${import.meta.env.VITE_API_URL}/listings?category=wisata`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Server Error (${res.status}): Gagal memuat data.`);
-        return res.json();
-      })
-      .then((resJson) => {
-        if (!resJson.success) throw new Error(resJson.message || 'Gagal memuat data');
-        // Filter kategori 'wisata' di sisi klien dan mapping data
-        const mappedData = Array.isArray(resJson.data) 
-          ? resJson.data
-          .filter(item => item.category?.slug === 'wisata')
-          .map(item => ({
-          id: item.id,
-          nama: item.title,
-          lokasi: item.metadata?.destination || 'Indonesia',
-          deskripsi: item.description,
-          rating: item.rating || 4.5,
-          harga: item.metadata?.price || 0,
-          gambar: item.imageUrl,
-          kategori: item.category?.name || 'Wisata'
-        }))
-        : [];
-        setDaftarWisata(mappedData);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(err.message || "Gagal terhubung ke server. Silakan coba lagi nanti.");
-        setLoading(false);
-      });
+    // Mengambil data dari file JSON lokal (tanpa fetch API/backend)
+    if (wisataData && wisataData.wisata) {
+      setDaftarWisata(wisataData.wisata);
+    }
+    setLoading(false);
   }, []);
 
   const kategoriUnik = ['Semua', ...new Set(daftarWisata.map(w => w.kategori))];
@@ -61,14 +34,6 @@ export default function Home() {
     : daftarWisata.filter(w => w.kategori === kategori);
 
   if (loading) return <div style={{ backgroundColor: '#070b18', minHeight: '100vh', color: '#fff', padding: '100px', textAlign: 'center' }}>Memuat Destinasi...</div>;
-
-  if (error) return (
-    <div style={{ backgroundColor: '#070b18', minHeight: '100vh', color: '#fff', padding: '100px', textAlign: 'center' }}>
-      <h2 style={{ color: '#ff4d4d' }}>⚠️ {error}</h2>
-      <p>Server sedang mengalami gangguan (Internal Server Error 500).</p>
-      <button onClick={() => window.location.reload()} style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}>Muat Ulang Halaman</button>
-    </div>
-  );
 
   return (
     <div style={{ backgroundColor: '#070b18', minHeight: '100vh', color: '#fff' }}>
@@ -133,7 +98,7 @@ export default function Home() {
                 <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ color: '#fbbf24', fontWeight: '600' }}>⭐ {wisata.rating}</span>
                   <span style={{ color: '#5eead4', fontWeight: 'bold' }}>
-                    {typeof wisata.harga === 'number' ? (wisata.harga > 0 ? `Rp ${wisata.harga.toLocaleString()}` : '') : wisata.harga}
+                    {typeof wisata.harga === 'number' ? (wisata.harga > 0 ? `Rp ${wisata.harga.toLocaleString()}` : 'Gratis') : wisata.harga}
                   </span>
                 </div>
               </div>

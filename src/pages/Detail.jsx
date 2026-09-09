@@ -1,7 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
+import wisataData from '../data/wisata.json';
 import '../styles/Detail.css';
- 
+
 // Data Insight Spesifik per Destinasi untuk efek "Wah"
 const aiInsightsData = {
   1: { // Borobudur
@@ -51,7 +52,6 @@ const aiInsightsData = {
   }
 };
 
-
 export default function Detail() {
   const { id } = useParams();
   const parsedId = useMemo(() => {
@@ -60,53 +60,32 @@ export default function Detail() {
   }, [id]);
 
   const [wisata, setWisata] = useState(null);
-  const [allWisata, setAllWisata] = useState([]); // State untuk rekomendasi
-  const [loading, setLoading] = useState(true); // State untuk loading
+  const [allWisata, setAllWisata] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setLoading(true); // Set loading true saat mulai fetch
 
-    
-    // Mengambil data dari API Produksi dengan filter kategori 'wisata'
-    fetch(`${import.meta.env.VITE_API_URL}/listings?category=wisata`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Gagal memuat data dari API');
-        return res.json();
-      })
-      .then((resJson) => {
-        // Memetakan data API ke format yang dikenali UI (nama, lokasi, harga, dll)
-        const mappedList = (resJson.data || []).map(item => ({
-          id: item.id,
-          nama: item.title, // API menggunakan 'title'
-          lokasi: item.metadata?.destination || 'Lokasi tidak tersedia', 
-          deskripsi: item.description,
-          rating: item.rating || 4.5,
-          harga: item.metadata?.price || 0, // Mengambil dari metadata price
-          gambar: item.imageUrl, // API menggunakan 'imageUrl'
-          jam: item.metadata?.opening_hours || '08:00 - 17:00',
-          kategori: item.category?.name || 'Wisata'
-        }));
+    // Mengambil data dari file JSON lokal
+    if (wisataData && wisataData.wisata) {
+      const mappedList = wisataData.wisata;
+      setAllWisata(mappedList);
 
-        setAllWisata(mappedList);
-
-        const found = mappedList.find((w) => Number(w.id) === parsedId);
-        if (found) {
-          setWisata(found);
-        }
-        setLoading(false); // Set loading false setelah data didapat
-      })
-      .catch((err) => {
-        console.error("Gagal memuat data:", err);
-        setLoading(false); // Set loading false meskipun ada error
-      });
+      const found = mappedList.find((w) => Number(w.id) === parsedId);
+      if (found) {
+        setWisata(found);
+      } else {
+        setWisata(null);
+      }
+    }
+    setLoading(false);
   }, [parsedId]);
 
-  if (loading) { // Tampilkan loading state
+  if (loading) {
     return <div className="detail-container"><div className="loading">Memuat informasi...</div></div>;
   }
 
-  if (!wisata) { // Jika tidak ada wisata setelah loading
+  if (!wisata) {
     return (
       <div className="detail-container">
         <div className="loading">
@@ -119,7 +98,7 @@ export default function Detail() {
     );
   }
 
-  // Ambil insight berdasarkan ID, jika tidak ada gunakan default kategori
+  // Ambil insight berdasarkan ID, jika tidak ada gunakan default
   const insight = aiInsightsData[wisata.id] || {
     rute: "Rencanakan perjalanan Anda lebih awal untuk menghindari keramaian.",
     fasilitas: "Fasilitas umum seperti toilet dan tempat istirahat tersedia di lokasi.",
@@ -139,7 +118,7 @@ export default function Detail() {
           className="detail-image"
           onError={(e) => {
             e.currentTarget.onerror = null;
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800'; // Default fallback image
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800';
           }}
         />
         <div className="detail-overlay">
@@ -226,7 +205,7 @@ export default function Detail() {
       <section className="wisata-serupa">
         <h2>Rekomendasi Lainnya</h2>
         <div className="rekomendasi-grid">
-          {allWisata // Menggunakan allWisata yang sudah di-fetch
+          {allWisata
             .filter((w) => Number(w.id) !== parsedId)
             .slice(0, 3)
             .map((w) => (
